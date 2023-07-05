@@ -26,6 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
+        height: double.infinity,
+        width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
@@ -47,43 +49,40 @@ class _LoginScreenState extends State<LoginScreen> {
               Stack(
                 children: [
                   Center(
-                    child: Expanded(
-                      child: Container(
-                        width: 350,
-                        height: 600,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.green, width: 3),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                controller: _idTextEditController,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Id'),
-                              ),
+                    child: Container(
+                      width: 350,
+                      height: 600,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.green, width: 3),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: _idTextEditController,
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Id'),
                             ),
-                            const SizedBox(
-                              height: 20,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: _passwordTextEditController,
+                              obscureText: true,
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Password'),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                controller: _passwordTextEditController,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: 'Password'),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -99,10 +98,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         onPressed: () {
-                          context.goNamed(
-                            'main',
-                            queryParameters: {'id': _idTextEditController.text},
-                          );
+                          if (_passwordTextEditController.text.length >= 6) {
+                            context.goNamed(
+                              'main',
+                              queryParameters: {
+                                'id': _idTextEditController.text
+                              },
+                            );
+                          }
                         },
                         child: const Text(
                           'Login',

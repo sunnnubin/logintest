@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sunyoubin/widgets/done_screen.dart.dart';
-import 'package:sunyoubin/widgets/todo_screen.dart';
+import 'package:sunyoubin/screens/done_screen.dart.dart';
+import 'package:sunyoubin/screens/todo_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final String id;
@@ -14,14 +14,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   TabController? _tabController;
-  MainScreen? extra;
+  List todos = List.empty();
 
   @override
   void initState() {
     super.initState();
-
-    debugPrint('ID: ${widget.id}');
-
     _tabController = TabController(length: 2, vsync: this);
   }
 
@@ -36,20 +33,25 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(context.namedLocation('main')),
-        bottom: TabBar(controller: _tabController, tabs: const [
-          Tab(
-            text: 'sample',
-          ),
-          Tab(
-            text: 'sample',
-          )
-        ]),
+        title: Text(widget.id),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              text: 'sample',
+            ),
+            Tab(
+              text: 'sample',
+            )
+          ],
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.go('/login');
+              },
               icon: const Icon(Icons.logout),
             ),
           ),

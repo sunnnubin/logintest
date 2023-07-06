@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:sunyoubin/screens/login_screen.dart';
 import 'package:sunyoubin/screens/main_screen.dart';
-import 'package:sunyoubin/screens/todo_screen.dart';
+import 'package:sunyoubin/screens/test_screen.dart';
 
 class MyRoter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/main',
+    initialLocation: '/login',
     routes: [
       GoRoute(
         path: '/login',
@@ -26,10 +26,9 @@ class MyRoter {
         },
       ),
       GoRoute(
-        path: '/test',
-        name: pathTest,
-        builder: (context, state) => const TodoScreen(),
-      ),
+          path: '/test',
+          name: pathTest,
+          builder: (context, state) => const TestScreen()),
     ],
   );
 

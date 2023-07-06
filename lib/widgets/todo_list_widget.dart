@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 
 class TodoListWidget extends StatefulWidget {
-  const TodoListWidget({super.key});
+  final String checkTextBtn;
+  final Color checkTextBtnColor;
+
+  const TodoListWidget({
+    super.key,
+    required this.checkTextBtn,
+    required this.checkTextBtnColor,
+  });
 
   @override
   State<TodoListWidget> createState() => _TodoListWidgetState();
 }
 
 class _TodoListWidgetState extends State<TodoListWidget> {
-  final _todoTextEditController = TextEditingController();
   var date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +44,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        const Text(
-                          'asd',
-                        ),
+                        const Text(''),
                         Text(
                           date.toString(),
                           style: const TextStyle(fontSize: 10),
@@ -51,29 +56,13 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                 const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    '완료',
-                    style: TextStyle(color: Colors.green),
+                  child: Text(
+                    widget.checkTextBtn,
+                    style: TextStyle(color: widget.checkTextBtnColor),
                   ),
                 )
               ],
             ),
-          ),
-        ),
-      ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: Container(
-          width: 350,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-            ),
-          ),
-          child: TextField(
-            controller: _todoTextEditController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), labelText: '한줄 To-do 입력하기'),
           ),
         ),
       ),

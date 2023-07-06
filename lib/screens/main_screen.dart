@@ -14,7 +14,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   TabController? _tabController;
-  List todos = List.empty();
 
   @override
   void initState() {
@@ -30,39 +29,42 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(widget.id),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(
-              text: 'sample',
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(widget.id),
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: const [
+              Tab(
+                text: 'Todo',
+              ),
+              Tab(
+                text: 'Done',
+              )
+            ],
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: IconButton(
+                onPressed: () {
+                  context.go('/login');
+                },
+                icon: const Icon(Icons.logout),
+              ),
             ),
-            Tab(
-              text: 'sample',
-            )
           ],
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: IconButton(
-              onPressed: () {
-                context.go('/login');
-              },
-              icon: const Icon(Icons.logout),
-            ),
-          ),
-        ],
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          TodoScreen(),
-          DoneScreen(),
-        ],
+        body: TabBarView(
+          controller: _tabController,
+          children: const [
+            TodoScreen(),
+            DoneScreen(),
+          ],
+        ),
       ),
     );
   }

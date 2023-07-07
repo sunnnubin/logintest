@@ -19,50 +19,49 @@ class _TodoListWidgetState extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: 350,
-          height: 70,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-            ),
-            borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 350,
+        height: 70,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.check,
-                  color: Colors.grey,
-                ),
-                const SizedBox(width: 30),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Text(''),
-                        Text(
-                          date.toString(),
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                      ],
-                    ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.check,
+                color: Colors.grey,
+              ),
+              const SizedBox(width: 30),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Text('여기에 가져온 데이터 출력'),
+                      Text(
+                        date.toString(),
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 10),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    widget.checkTextBtn,
-                    style: TextStyle(color: widget.checkTextBtnColor),
-                  ),
-                )
-              ],
-            ),
+              ),
+              const SizedBox(width: 10),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  widget.checkTextBtn,
+                  style: TextStyle(color: widget.checkTextBtnColor),
+                ),
+              )
+            ],
           ),
         ),
       ),

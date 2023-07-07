@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunyoubin/controllers/todo_provider.dart';
+import 'package:sunyoubin/widgets/todo_list_widget.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -11,13 +12,11 @@ class TodoScreen extends StatefulWidget {
 
 class _TodoScreenState extends State<TodoScreen> {
   final _todoTextEditController = TextEditingController();
-  static String newTodoListText = '';
-  @override
-  void initState() {
-    super.initState();
-    _todoTextEditController.addListener(() {
-      newTodoListText = _todoTextEditController.text;
-    });
+
+  void addTodo() {
+    var todotext = _todoTextEditController;
+    context.read<TodoProvider>().add(todotext.text);
+    todotext.clear();
   }
 
   @override
@@ -26,52 +25,39 @@ class _TodoScreenState extends State<TodoScreen> {
     _todoTextEditController.dispose();
   }
 
-  void _submit() {
-    Provider.of<TodoProvider>(context, listen: false).add(newTodoListText);
-
-    _todoTextEditController.clear();
-  }
-
   var date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-    final listdata = Provider.of<TodoProvider>(context);
+    var listdata = context.read<TodoProvider>().todoDataList;
     return Scaffold(
       body: Center(
         child: ListView.builder(
-          itemCount: listdata.todoList.length,
+          itemCount: listdata.length,
           itemBuilder: (BuildContext context, int index) {
-            listdata;
-            return null;
+            return const TodoListWidget(
+                checkTextBtn: '완료', checkTextBtnColor: Colors.green);
           },
         ),
       ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(10),
-        child: Stack(
-          children: [
-            TextField(
-              controller: _todoTextEditController,
-              decoration: const InputDecoration(
-                isDense: true,
-                border: OutlineInputBorder(),
-                labelText: '한줄 To-do 입력하기',
+        child: TextField(
+          controller: _todoTextEditController,
+          decoration: InputDecoration(
+            isDense: true,
+            border: const OutlineInputBorder(),
+            labelText: '한줄 To-do 입력하기',
+            prefix: TextButton(
+              onPressed: () {
+                addTodo();
+              },
+              child: const Text(
+                '추가',
+                style: TextStyle(color: Colors.black),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 330, right: 10, top: 5),
-              child: TextButton(
-                onPressed: () {
-                  _submit();
-                  debugPrint(newTodoListText);
-                },
-                child: const Text(
-                  '추가',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

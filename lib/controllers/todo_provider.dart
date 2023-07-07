@@ -1,23 +1,27 @@
-import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:sunyoubin/widgets/todo_list_widget.dart';
+import 'package:sunyoubin/models/todo_data.dart';
 
 class TodoProvider extends ChangeNotifier {
   ///Todo List
-  final List _todolist = [];
+  final List<TodoData> _todolist = [];
 
   ///Done List
-  final List _donelist = [];
+  final List<TodoData> _donelist = [];
 
-  UnmodifiableListView get todoList => UnmodifiableListView(_todolist);
+  List<TodoData> get todoDataList => _todolist;
 
   void add(String listText) {
-    _todolist.add(listText);
+    _todolist.add(
+      TodoData(
+        todo: listText,
+      ),
+    );
+    debugPrint(listText);
     notifyListeners();
   }
 
-  void remove(TodoListWidget listText) {
-    _todolist.remove(listText);
+  void remove(int listnum) {
+    _todolist.remove(_todolist[listnum]);
     notifyListeners();
   }
 }

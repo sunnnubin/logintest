@@ -5,4 +5,10 @@ class TodoData {
   TodoData({
     required this.todo,
   });
+
+  TodoData copy({
+    String? todo,
+  }) {
+    return TodoData(todo: todo ?? this.todo);
+  }
 }

@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: 3.0.5
 
 
 dependencies:
@@ -15,9 +15,9 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  easy_extension:
-    git:
-      url: https://github.com/scadasystems/Easy-Extension.git
+  # easy_extension:
+  #   git:
+  #     url: https://github.com/scadasystems/Easy-Extension.git
   go_router: ^9.0.0
   google_fonts: ^5.1.0
   provider: ^6.0.5

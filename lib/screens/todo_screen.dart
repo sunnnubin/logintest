@@ -29,14 +29,21 @@ class _TodoScreenState extends State<TodoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var listdata = context.read<TodoProvider>().todoDataList;
+    var listdata = context.watch<TodoProvider>().todoDataList;
     return Scaffold(
       body: Center(
-        child: ListView.builder(
+        child: ListView.separated(
           itemCount: listdata.length,
-          itemBuilder: (BuildContext context, int index) {
-            return const TodoListWidget(
-                checkTextBtn: '완료', checkTextBtnColor: Colors.green);
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 5,
+          ),
+          itemBuilder: (context, index) {
+            var todo = listdata[index];
+            return TodoListWidget(
+              checkTextBtn: '완료',
+              checkTextBtnColor: Colors.green,
+              listText: todo.todo,
+            );
           },
         ),
       ),

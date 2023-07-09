@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:sunyoubin/screens/login_screen.dart';
 import 'package:sunyoubin/screens/main_screen.dart';
-import 'package:sunyoubin/screens/test_screen.dart';
 
 class MyRoter {
   static final GoRouter router = GoRouter(
@@ -25,14 +24,9 @@ class MyRoter {
           );
         },
       ),
-      GoRoute(
-          path: '/test',
-          name: pathTest,
-          builder: (context, state) => const TestScreen()),
     ],
   );
 
   static const pathLogin = 'login';
   static const pathMain = 'main';
-  static const pathTest = 'test';
 }

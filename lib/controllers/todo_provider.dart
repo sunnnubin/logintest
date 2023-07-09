@@ -9,6 +9,7 @@ class TodoProvider extends ChangeNotifier {
   final List<TodoData> _donelist = [];
 
   List<TodoData> get todoDataList => _todolist;
+  List<TodoData> get doneDataList => _donelist;
 
   void add(String listText) {
     _todolist.add(
@@ -20,8 +21,13 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void remove(int listnum) {
-    _todolist.remove(_todolist[listnum]);
+  void doneremove(int index) {
+    _donelist.removeAt(index);
+  }
+
+  void doneTodo(int index) {
+    var doneTodo = _todolist.removeAt(index);
+    _donelist.add(doneTodo.copy());
     notifyListeners();
   }
 }

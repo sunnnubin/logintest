@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunyoubin/controllers/todo_provider.dart';
 
 class TodoListWidget extends StatefulWidget {
   final String checkTextBtn;
   final Color checkTextBtnColor;
+  final String listText;
 
   const TodoListWidget({
     super.key,
     required this.checkTextBtn,
     required this.checkTextBtnColor,
+    required this.listText,
   });
 
   @override
@@ -44,7 +48,7 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      const Text('여기에 가져온 데이터 출력'),
+                      Text(widget.listText),
                       Text(
                         date.toString(),
                         style: const TextStyle(fontSize: 10),
@@ -55,7 +59,11 @@ class _TodoListWidgetState extends State<TodoListWidget> {
               ),
               const SizedBox(width: 10),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  return widget.checkTextBtn == "완료"
+                      ? context.read<TodoProvider>().doneTodo(0)
+                      : context.read<TodoProvider>().doneremove(0);
+                },
                 child: Text(
                   widget.checkTextBtn,
                   style: TextStyle(color: widget.checkTextBtnColor),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunyoubin/controllers/todo_provider.dart';
+import 'package:sunyoubin/widgets/todo_list_widget.dart';
 
 class DoneScreen extends StatefulWidget {
   const DoneScreen({super.key});
@@ -10,8 +13,22 @@ class DoneScreen extends StatefulWidget {
 class _DoneScreenState extends State<DoneScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomSheet: TextField(),
+    var listdata = context.watch<TodoProvider>().doneDataList;
+    return Scaffold(
+      body: Center(
+        child: ListView.separated(
+            itemBuilder: (context, index) {
+              var todo = listdata[index];
+              return TodoListWidget(
+                  checkTextBtn: '삭제',
+                  checkTextBtnColor: Colors.red,
+                  listText: todo.todo);
+            },
+            separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+            itemCount: listdata.length),
+      ),
     );
   }
 }

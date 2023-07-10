@@ -15,14 +15,16 @@ class TodoProvider extends ChangeNotifier {
     _todolist.add(
       TodoData(
         todo: listText,
+        date: DateTime.now().toString(),
       ),
     );
     debugPrint(listText);
     notifyListeners();
   }
 
-  void doneremove(int index) {
+  void doneRemove(int index) {
     _donelist.removeAt(index);
+    notifyListeners();
   }
 
   void doneTodo(int index) {

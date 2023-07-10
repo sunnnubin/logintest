@@ -40,9 +40,11 @@ class _TodoScreenState extends State<TodoScreen> {
           itemBuilder: (context, index) {
             var todo = listdata[index];
             return TodoListWidget(
+              index: index,
               checkTextBtn: '완료',
               checkTextBtnColor: Colors.green,
               listText: todo.todo,
+              date: DateTime.now().toString(),
             );
           },
         ),
@@ -55,13 +57,15 @@ class _TodoScreenState extends State<TodoScreen> {
             isDense: true,
             border: const OutlineInputBorder(),
             labelText: '한줄 To-do 입력하기',
-            prefix: TextButton(
+            suffix: TextButton(
               onPressed: () {
                 addTodo();
               },
               child: const Text(
                 '추가',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
             ),
           ),

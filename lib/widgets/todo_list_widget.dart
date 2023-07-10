@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunyoubin/controllers/todo_provider.dart';
 
-class TodoListWidget extends StatefulWidget {
+class TodoListWidget extends StatelessWidget {
   final String checkTextBtn;
   final Color checkTextBtnColor;
   final String listText;
+  final int index;
+  final String date;
 
   const TodoListWidget({
     super.key,
     required this.checkTextBtn,
     required this.checkTextBtnColor,
     required this.listText,
+    required this.index,
+    required this.date,
   });
-
-  @override
-  State<TodoListWidget> createState() => _TodoListWidgetState();
-}
-
-class _TodoListWidgetState extends State<TodoListWidget> {
-  var date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +45,9 @@ class _TodoListWidgetState extends State<TodoListWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text(widget.listText),
+                      Text(listText),
                       Text(
-                        date.toString(),
+                        date,
                         style: const TextStyle(fontSize: 10),
                       ),
                     ],
@@ -60,13 +57,13 @@ class _TodoListWidgetState extends State<TodoListWidget> {
               const SizedBox(width: 10),
               TextButton(
                 onPressed: () {
-                  return widget.checkTextBtn == "완료"
-                      ? context.read<TodoProvider>().doneTodo(0)
-                      : context.read<TodoProvider>().doneremove(0);
+                  return checkTextBtn == "완료"
+                      ? context.read<TodoProvider>().doneTodo(index)
+                      : context.read<TodoProvider>().doneRemove(index);
                 },
                 child: Text(
-                  widget.checkTextBtn,
-                  style: TextStyle(color: widget.checkTextBtnColor),
+                  checkTextBtn,
+                  style: TextStyle(color: checkTextBtnColor),
                 ),
               )
             ],

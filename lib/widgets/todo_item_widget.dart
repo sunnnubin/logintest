@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunyoubin/controllers/todo_provider.dart';
 
-class TodoListWidget extends StatelessWidget {
+///리스트 아이템 위젯
+class TodoItemWidget extends StatelessWidget {
   final String checkTextBtn;
   final Color checkTextBtnColor;
   final String listText;
   final int index;
   final String date;
 
-  const TodoListWidget({
+  const TodoItemWidget({
     super.key,
     required this.checkTextBtn,
     required this.checkTextBtnColor,

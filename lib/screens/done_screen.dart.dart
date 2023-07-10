@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunyoubin/controllers/todo_provider.dart';
-import 'package:sunyoubin/widgets/todo_list_widget.dart';
+import 'package:sunyoubin/widgets/todo_item_widget.dart';
 
 class DoneScreen extends StatefulWidget {
   const DoneScreen({super.key});
@@ -19,12 +19,12 @@ class _DoneScreenState extends State<DoneScreen> {
         child: ListView.separated(
           itemBuilder: (context, index) {
             var todo = listdata[index];
-            return TodoListWidget(
+            return TodoItemWidget(
               index: index,
               checkTextBtn: '삭제',
               checkTextBtnColor: Colors.red,
               listText: todo.todo,
-              date: DateTime.now().toString(),
+              date: '${todo.date}',
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 10),

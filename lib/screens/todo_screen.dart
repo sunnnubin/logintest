@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunyoubin/controllers/todo_provider.dart';
-import 'package:sunyoubin/widgets/todo_list_widget.dart';
+import 'package:sunyoubin/widgets/todo_item_widget.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -11,8 +11,10 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+  ///투두 텍스트필드 컨트롤러
   final _todoTextEditController = TextEditingController();
 
+  ///필드 값 리스트 추가함수
   void addTodo() {
     var todotext = _todoTextEditController;
     context.read<TodoProvider>().add(todotext.text);
@@ -25,8 +27,7 @@ class _TodoScreenState extends State<TodoScreen> {
     _todoTextEditController.dispose();
   }
 
-  var date = DateTime.now();
-
+  //
   @override
   Widget build(BuildContext context) {
     var listdata = context.watch<TodoProvider>().todoDataList;
@@ -39,12 +40,12 @@ class _TodoScreenState extends State<TodoScreen> {
           ),
           itemBuilder: (context, index) {
             var todo = listdata[index];
-            return TodoListWidget(
+            return TodoItemWidget(
               index: index,
               checkTextBtn: '완료',
               checkTextBtnColor: Colors.green,
               listText: todo.todo,
-              date: DateTime.now().toString(),
+              date: '${todo.date}',
             );
           },
         ),

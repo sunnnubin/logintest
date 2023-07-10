@@ -7,14 +7,14 @@ class MyRoter {
     initialLocation: '/login',
     routes: [
       GoRoute(
-        path: '/login',
+        path: '/$pathLogin',
         name: pathLogin,
         builder: (context, state) {
           return const LoginScreen(id: 'id');
         },
       ),
       GoRoute(
-        path: '/main',
+        path: '/$pathMain',
         name: pathMain,
         builder: (context, state) {
           final id = state.queryParameters['id'];

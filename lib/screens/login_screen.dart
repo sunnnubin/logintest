@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
-        ///바탕화면 터치시 키보드 숨김기능
+        //!바탕화면 터치시 키보드 숨김기능
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Container(
           height: double.infinity,
